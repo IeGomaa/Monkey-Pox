@@ -6,7 +6,7 @@ trait DiagnosisTrait
 {
     private function getDiagnoses()
     {
-        return $this->diagnosisModel::with('patient')->get();
+        return $this->diagnosisModel::get();
     }
 
     private function findDiagnosis($id)
