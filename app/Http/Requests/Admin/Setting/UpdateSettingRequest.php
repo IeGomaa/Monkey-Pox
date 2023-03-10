@@ -27,7 +27,9 @@ class UpdateSettingRequest extends FormRequest
         return [
             'id' => 'required|integer|exists:settings,id',
             'name' => 'required|string|max:255',
-            'value' => 'required|string|unique:settings,value,' . request('id')
+            'type' => 'required|string|max:255',
+            'string' => 'required_if:type,string|string|max:255',
+            'image' => 'required_if:type,image|image|mimes:png,jpg,webp,jpeg'
         ];
     }
 }

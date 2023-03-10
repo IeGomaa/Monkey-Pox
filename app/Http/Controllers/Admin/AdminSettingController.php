@@ -7,7 +7,7 @@ use App\Http\Interfaces\Admin\AdminSettingInterface;
 use App\Http\Requests\Admin\Setting\CreateSettingRequest;
 use App\Http\Requests\Admin\Setting\DeleteSettingRequest;
 use App\Http\Requests\Admin\Setting\UpdateSettingRequest;
-use Illuminate\Http\Request;
+use App\Http\Services\Setting\SettingDeleteImageService;
 
 class AdminSettingController extends Controller
 {
@@ -27,9 +27,9 @@ class AdminSettingController extends Controller
         return $this->settingInterface->create($request);
     }
 
-    public function delete(DeleteSettingRequest $request)
+    public function delete(DeleteSettingRequest $request, SettingDeleteImageService $service)
     {
-        return $this->settingInterface->delete($request);
+        return $this->settingInterface->delete($request, $service);
     }
 
     public function update(UpdateSettingRequest $request)
