@@ -24,9 +24,6 @@ class CreateFaqRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'question' => 'required|string|unique:faqs,question',
-            'answer' => 'required|string'
-        ];
+        return Faq::createRule();
     }
 }

@@ -28,6 +28,9 @@ use App\Http\Controllers\Admin\AdminTownController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Admin\AdminVaccineController;
 use App\Http\Controllers\Admin\AdminVaccineInformationController;
+use App\Http\Controllers\Admin\Excel\AdminCityExcelController;
+use App\Http\Controllers\Admin\Excel\AdminCountryExcelController;
+use App\Http\Controllers\Admin\Excel\AdminFaqExcelController;
 use App\Http\Controllers\Ai\PatientRadiographyController;
 use App\Http\Controllers\EndUser\AboutController;
 use App\Http\Controllers\EndUser\ContactController;
@@ -133,6 +136,12 @@ Route::group(['middleware' => ['api', 'jwt.verify'], 'prefix' => 'auth', 'as' =>
             Route::post('delete', 'delete')->name('delete');
             Route::post('update', 'update')->name('update');
         });
+
+        Route::controller(AdminFaqExcelController::class)->group(function () {
+            Route::post('import','import')->name('import');
+            Route::get('export','export')->name('export');
+        });
+
     });
 
     Route::group(['prefix' => 'slider', 'as' => 'slider.'], function () {
@@ -231,6 +240,12 @@ Route::group(['middleware' => ['api', 'jwt.verify'], 'prefix' => 'auth', 'as' =>
             Route::post('delete','delete')->name('delete');
             Route::post('update','update')->name('update');
         });
+
+        Route::controller(AdminCountryExcelController::class)->group(function () {
+            Route::post('import','import')->name('import');
+            Route::get('export','export')->name('export');
+        });
+
     });
 
     Route::group(['prefix' => 'city', 'as' => 'city.'], function () {
@@ -240,6 +255,12 @@ Route::group(['middleware' => ['api', 'jwt.verify'], 'prefix' => 'auth', 'as' =>
             Route::post('delete', 'delete')->name('delete');
             Route::post('update', 'update')->name('update');
         });
+
+        Route::controller(AdminCityExcelController::class)->group(function () {
+            Route::post('import','import')->name('import');
+            Route::get('export','export')->name('export');
+        });
+
     });
 
     Route::group(['prefix' => 'town', 'as' => 'town.'], function () {
@@ -357,5 +378,17 @@ Route::group(['prefix' => 'monkey-pox', 'as' => 'user.'], function () {
     });
 
     Route::post('contact', [ContactController::class, 'create'])->name('contact');
+
+    Route::controller(AdminCountryExcelController::class)->group(function () {
+        Route::get('country/export','export');
+    });
+
+    Route::controller(AdminCityExcelController::class)->group(function () {
+        Route::get('city/export','export');
+    });
+
+    Route::controller(AdminFaqExcelController::class)->group(function () {
+        Route::get('faq/export','export');
+    });
 
 });

@@ -18,6 +18,13 @@ class Country extends Model
         'updated_at'
     ];
 
+    public static function createRule(): array
+    {
+        return [
+            'name' => 'required|string|max:255|unique:countries,name'
+        ];
+    }
+
     public function city(): HasMany
     {
         return $this->hasMany(City::class, 'city_id', 'id');

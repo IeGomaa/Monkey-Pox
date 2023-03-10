@@ -16,4 +16,12 @@ class Faq extends Model
         'created_at',
         'updated_at'
     ];
+
+    public static function createRule(): array
+    {
+        return [
+            'question' => 'required|string|unique:faqs,question',
+            'answer' => 'required|string'
+        ];
+    }
 }

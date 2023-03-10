@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin\Country;
+namespace App\Http\Requests\Admin\Excel\Country;
 
-use App\Models\Country;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCountryRequest extends FormRequest
+class ImportCountryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +23,8 @@ class CreateCountryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return Country::createRule();
+        return [
+            'file' => 'required|file'
+        ];
     }
 }
